@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "../UI/Card";
 import styles from "./UserInput.module.css";
+import Button from "../UI/Button";
+
 const UserInput = function () {
   const submitHandler = function (e) {
     e.preventDefault();
@@ -13,7 +15,7 @@ const UserInput = function () {
         <input id="name"></input>
         <label htmlFor="age">Age</label>
         <input id="age"></input>
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     </Card>
   );
