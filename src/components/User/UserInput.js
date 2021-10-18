@@ -4,13 +4,21 @@ import Card from "../UI/Card";
 import styles from "./UserInput.module.css";
 import Button from "../UI/Button";
 
-const UserInput = function () {
+const UserInput = function (props) {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
   const submitHandler = function (e) {
     e.preventDefault();
-    console.log(name, age);
+
+    // return on bad input
+    if (name.trim().length === 0 || age.trim().length === 0) return;
+    if (+age < 1) return;
+
+    // reset values
+    props.onSaveData(name, age);
+    setName("");
+    setAge("");
   };
 
   const nameChange = function (e) {
@@ -23,11 +31,11 @@ const UserInput = function () {
 
   return (
     <Card className={styles.input}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} autoComplete="off">
         <label htmlFor="name">Name</label>
-        <input id="name" onChange={nameChange}></input>
+        <input id="name" onChange={nameChange} value={name}></input>
         <label htmlFor="age">Age</label>
-        <input id="age" onChange={ageChange}></input>
+        <input id="age" onChange={ageChange} value={age}></input>
         <Button type="submit">Submit</Button>
       </form>
     </Card>
